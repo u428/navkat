@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Navkat MFY — Rasmiy Sayt</title>
+  <style>
+    * {margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif;}
+    body {background-color: #f0f9ff; overflow-x: hidden;}
+
+    /* 🔹 Intro ekran */
+    #intro {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+      display: flex; flex-direction: column; justify-content: center; align-items: center;
+      color: white; font-size: 2.5em;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 5s;
+      z-index: 999;
+    }
+    @keyframes fadeOut {
+      to {opacity: 0; visibility: hidden;}
+    }
+    #intro h1 {
+      font-size: 3em;
+      animation: fadeIn 1.5s ease;
+    }
+    @keyframes fadeIn {
+      from {opacity: 0; transform: scale(0.9);}
+      to {opacity: 1; transform: scale(1);}
+    }
+
+    /* 🔹 Header qismi */
+    header {
+      background: #0284c7;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    header h1 {font-size: 1.8em;}
+    header .right a {
+      color: white;
+      text-decoration: none;
+      background: #0369a1;
+      padding: 8px 16px;
+      border-radius: 8px;
+      margin-left: 10px;
+    }
+    header .right a:hover {
+      background: #075985;
+    }
+
+    /* 🔹 Asosiy qism */
+    section {
+      padding: 60px 10%;
+      text-align: center;
+    }
+    section h2 {
+      color: #0369a1;
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    section p {
+      font-size: 1.1em;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* 🔹 Tadbirlar */
+    .events {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .event {
+      background: white;
+      width: 280px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+      transition: 0.3s;
+    }
+    .event:hover {transform: translateY(-5px);}
+    .event img {width: 100%; height: 180px; object-fit: cover;}
+    .event h3 {padding: 10px; color: #0369a1;}
+    .event p {padding: 0 10px 15px; color: #555; font-size: 0.95em;}
+
+    /* 🔹 Footer */
+    footer {
+      background: #0284c7;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    /* 🔹 Smooth ko‘rinish */
+    html {scroll-behavior: smooth;}
+  </style>
+</head>
+<body>
+
+  <!-- 🔷 Intro qismi -->
+  <div id="intro">
+    <h1>Navkat MFY</h1>
+    <p>Birgalikda farovon kelajak sari</p>
+  </div>
+
+  <!-- 🔷 Header -->
+  <header>
+    <h1>Navkat MFY</h1>
+    <div class="right">
+      <a href="https://www.uwed.uz/">O‘quv markazi</a>
+      <a href="Navkat.admin.html">Admin</a>
+    </div>
+  </header>
+
+  <!-- 🔷 Asosiy ma’lumot -->
+  <section id="about">
+    <h2>Biz haqimizda</h2>
+    <p>
+      Navkat Samarqand viloyatidan 95 kilometr uzoqlikda joylashgan cheka hudud. Bu yerda 
+      640 honadonda 4500 ga yaqin fuqaro yashaydi ularning mingdan ortig'i yoshlar. Ular bilim 
+      olishni kasb hunar organishni istaydi. Mahaliy aholi esa tadbirkorlik ortidan daromad qilish niyatida
+      <br>
+      Navkat MFY — bu farovonlik, ta’lim va hamjihatlik markazi. Bizning maqsadimiz yoshlar, o‘qituvchilar va 
+      mahalla aholisi uchun qulay muhit yaratishdir. Bu yerda turli ijtimoiy tadbirlar, 
+      o‘quv kurslari va madaniy loyihalar o‘tkaziladi.
+    </p>
+  </section>
+
+  <!-- 🔷 Tadbirlar -->
+  <section id="events">
+    <h2>So‘nggi tadbirlar</h2>
+    <div class="events" id="eventsContainer">
+      <!-- Tadbirlar bu yerga avtomatik qo‘shiladi -->
+    </div>
+  </section>
+
+  <!-- 🔷 Aloqa -->
+  <section id="contact">
+    <h2>Aloqa</h2>
+    <p>
+      📍 Manzil: Navkat MFY, Qo'shrabot tumani, O‘zbekiston<br>
+      ☎️ Telefon: +998 95 022 47 95<br>
+      📧 Email: info@navkat.uz
+    </p>
+  </section>
+
+  <footer>
+    &copy; 2025 Navkat MFY — Barcha huquqlar himoyalangan.
+  </footer>
+
+  <script>
+    // Intro 5 soniyadan keyin yo‘qoladi
+    setTimeout(() => {
+      document.getElementById("intro").style.display = "none";
+    }, 5000);
+
+    // 🔹 LocalStorage'dan tadbirlarni o‘qish
+    function loadEvents() {
+      const container = document.getElementById("eventsContainer");
+      const events = JSON.parse(localStorage.getItem("events") || "[]");
+      container.innerHTML = "";
+
+      if (events.length === 0) {
+        container.innerHTML = "<p>Hozircha tadbirlar mavjud emas.</p>";
+      }
+
+      events.forEach(ev => {
+        const div = document.createElement("div");
+        div.className = "event";
+        div.innerHTML = `
+          <img src="${ev.img}" alt="${ev.title}">
+          <h3>${ev.title}</h3>
+          <p>${ev.desc}</p>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    loadEvents(); // sahifa ochilganda avtomatik yuklaydi
+  </script>
+
+</body>
+</html>
