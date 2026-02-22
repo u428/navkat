@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>Mahalla — Yaqinlik va hamjihatlik</title>
+  <meta name="description" content="Mahalla yangiliklari, e'lonlar, savol-javob, ko'ngillilar, galereya va guruhlar." />
+  <meta name="theme-color" content="#2563eb" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========== CSS styles ========== */
+    :root {
+      --bg: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --primary: #2563eb;
+      --primary-ink: #fff;
+      --surface: #f8fafc;
+      --border: #e5e7eb;
+      --alt: #f3f4f6;
+      --card: #ffffff;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --header-height: 64px;
+    }
+
+    :root.dark {
+      --bg: #0b1020;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --primary: #60a5fa;
+      --primary-ink: #0b1020;
+      --surface: #0f1628;
+      --border: #1f2937;
+      --alt: #131a2b;
+      --card: #12192c;
+      --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img, video { max-width: 100%; height: auto; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* HEADER & NAV */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: saturate(1.8) blur(10px);
+      background: rgba(255, 255, 255, 0.9);
+    }
+    :root.dark .site-header { background: rgba(11, 16, 32, 0.85); }
+
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: var(--header-height);
+      gap: 12px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 700;
+      font-size: 1.1rem;
+    }
+    .logo { width: 32px; height: 32px; border-radius: 6px; object-fit: cover; }
+
+    .header-main { display: flex; align-items: center; gap: 12px; }
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: var(--text);
+      padding: 4px;
+      cursor: pointer;
+    }
+
+    .nav-list {
+      display: flex;
+      gap: 16px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-list a {
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 6px 0;
+      border-bottom: 2px solid transparent;
+      transition: .2s;
+    }
+    .nav-list a:hover { color: var(--primary); border-bottom-color: var(--primary); }
+
+    .header-actions { display: flex; align-items: center; gap: 8px; }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-weight: 500;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all .2s ease;
+      background: var(--surface);
+      color: var(--text);
+      border-color: var(--border);
+    }
+    .btn.primary { background: var(--primary); color: var(--primary-ink); border-color: var(--primary); }
+    .btn.ghost { background: transparent; border-color: transparent; }
+    .btn.small { padding: 6px 10px; font-size: 0.85rem; }
+    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    /* HERO SECTION */
+    .hero { background: linear-gradient(180deg, var(--surface), transparent); padding: 40px 0; }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 32px;
+    }
+    .hero-copy h1 { font-size: 2.2rem; line-height: 1.2; margin: 0 0 16px 0; color: var(--text); }
+    .hero-copy .lead { color: var(--muted); font-size: 1.1rem; margin-bottom: 24px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .hero-stats {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .stat {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+      min-width: 100px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      flex: 1;
+    }
+    .stat span { display: block; font-weight: 800; font-size: 1.5rem; color: var(--primary); }
+    .stat small { color: var(--muted); text-transform: uppercase; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.5px; }
+
+    /* SECTIONS */
+    .section { padding: 40px 0; }
+    .section.alt { background: var(--alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .section-head { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .section-head h2 { margin: 0; font-size: 1.75rem; }
+    .section-tools { display: flex; gap: 8px; flex-wrap: wrap; }
+
+    /* GRIDS & CARDS */
+    .grid { display: grid; gap: 20px; }
+    .cards, .responsive-3 { grid-template-columns: repeat(3, 1fr); }
+    .leadership-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+    .gallery { grid-template-columns: repeat(3, 1fr); }
+
+    .card, .leadership-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: transform .2s;
+    }
+    .card:hover, .leadership-card:hover { transform: translateY(-3px); }
+    .card h3, .leadership-card h3 { margin: 0; font-size: 1.15rem; }
+    .card small { color: var(--muted); font-size: 0.85rem; }
+
+    .leadership-card h3 { color: var(--primary); }
+    .leadership-card .position { font-weight: 600; font-size: 0.95rem; }
+    .leadership-card .info p { margin: 4px 0; font-size: 0.9rem; color: var(--muted); }
+    .leadership-card .contact { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); color: var(--primary); font-weight: 600; }
+
+    .qa-list .qa-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow);
+    }
+    .qa-meta { display: flex; justify-content: space-between; margin-bottom: 8px; color: var(--muted); font-size: 0.9rem; }
+
+    .gallery .photo {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      aspect-ratio: 4/3;
+      background: var(--surface);
+    }
+    .gallery img { width: 100%; height: 100%; object-fit: cover; }
+    .gallery .caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(0,0,0,0.7); color: #fff;
+      padding: 8px 12px; font-size: 0.9rem;
+      backdrop-filter: blur(4px);
+    }
+
+    /* TABS */
+    .tabs-wrapper { overflow-x: auto; padding-bottom: 4px; margin-bottom: 16px; -webkit-overflow-scrolling: touch; }
+    .tabs { display: flex; gap: 10px; min-width: max-content; }
+    .tab {
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    .tab.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+    /* MAP */
+    .map-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      height: 400px;
+      background: var(--surface);
+    }
+    .map-wrap iframe { width: 100%; height: 100%; }
+
+    /* FOOTER */
+    .site-footer { background: var(--surface); border-top: 1px solid var(--border); margin-top: 60px; padding-top: 40px; }
+    .footer-inner { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 40px; margin-bottom: 30px; }
+    .footer-col h4 { margin-top: 0; margin-bottom: 16px; font-size: 1.1rem; }
+    .footer-links { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
+    .footer-links a { text-decoration: none; color: var(--muted); }
+    .footer-links a:hover { color: var(--primary); }
+    .footer-bottom { border-top: 1px solid var(--border); padding: 20px 16px; text-align: center; color: var(--muted); }
+
+    /* FORMS & MODAL */
+    .input, textarea, select {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      margin-bottom: 8px;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+
+    .modal {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      display: none;
+      align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .modal.show { display: flex; }
+    .modal-dialog {
+      width: 100%; max-width: 500px;
+      background: var(--card);
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+      overflow: hidden;
+      max-height: 90vh;
+      display: flex; flex-direction: column;
+    }
+    .modal-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .modal-body { padding: 20px; overflow-y: auto; }
+    .modal-footer { padding: 16px 20px; background: var(--alt); border-top: 1px solid var(--border); display: flex; justify-content: flex-end; gap: 10px; }
+    .modal-close { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted); }
+
+    .toast {
+      position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+      background: var(--text); color: var(--bg);
+      padding: 12px 24px; border-radius: 50px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+      opacity: 0; transition: .3s; pointer-events: none; z-index: 110;
+    }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+    /* --- MOBILE RESPONSIVE --- */
+
+    /* Tablet & Smaller (Max 900px) */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: left; }
+      .hero-stats { justify-content: flex-start; }
+      .cards, .responsive-3, .gallery { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* Mobile (Max 600px) */
+    @media (max-width: 600px) {
+      :root { --header-height: 60px; }
+      
+      /* Mobile Navigation */
+      .nav-toggle { display: block; }
+      .nav-list {
+        display: none;
+        position: absolute;
+        top: var(--header-height);
+        left: 0; right: 0;
+        background: var(--card);
+        flex-direction: column;
+        padding: 16px;
+        border-bottom: 1px solid var(--border);
+        box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        gap: 0;
+      }
+      .nav-list.show { display: flex; animation: slideDown 0.2s ease-out; }
+      .nav-list li { width: 100%; border-bottom: 1px solid var(--border); }
+      .nav-list li:last-child { border: none; }
+      .nav-list a { display: block; padding: 12px 0; font-size: 1rem; }
+
+      /* Elements */
+      .cards, .responsive-3, .leadership-grid, .gallery { grid-template-columns: 1fr; }
+      
+      .hero-copy h1 { font-size: 1.75rem; }
+      .hero-stats { width: 100%; }
+      .stat { flex: 1 1 30%; }
+      
+      .section-head.column-mobile { flex-direction: column; align-items: stretch; }
+      .section-tools.full-width-mobile { width: 100%; }
+      .section-tools input { width: 100%; }
+      .section-tools .btn { width: 100%; }
+      
+      .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+      
+      /* Hide 'Mahalla' text if needed */
+      .brand-text { display: none; } 
+      .header-actions .btn { padding: 6px 10px; font-size: 0.8rem; }
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-main">
+        <a class="brand" href="#" aria-label="Mahalla bosh sahifa">
+          <img src="C:\Users\Azizbek\Desktop\Navkat logo.png" alt="Logo" class="logo">
+          <span class="brand-text" data-i18n="brand">Mahalla</span>
+        </a>
+        <button class="nav-toggle" aria-expanded="false" aria-controls="primary-menu">
+          <span class="sr-only">Menyuni ochish</span>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <nav class="nav" aria-label="Asosiy navigatsiya">
+        <ul id="primary-menu" class="nav-list">
+          <li><a href="#news" data-i18n="nav_news">Yangiliklar</a></li>
+          <li><a href="#announcements" data-i18n="nav_ann">E'lonlar</a></li>
+          <li><a href="#qa" data-i18n="nav_qa">Savol-javob</a></li>
+          <li><a href="#volunteers" data-i18n="nav_volunteers">Kongillilar</a></li>
+          <li><a href="#gallery" data-i18n="nav_gallery">Galereya</a></li>
+          <li><a href="#groups" data-i18n="nav_groups">Guruhlar</a></li>
+          <li><a href="#leadership" data-i18n="nav_leadership">Rahbariyat</a></li>
+          <li><a href="#map" data-i18n="nav_map">Xarita</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button id="lang-toggle" class="btn ghost small" aria-label="Tilni almashtirish">UZ</button>
+        <button id="theme-toggle" class="btn ghost small" aria-label="Tunda rejim">🌙</button>
+        <button id="loginBtn" class="btn small" data-i18n="admin_login">Kirish</button>
+        <button id="logoutBtn" class="btn ghost small" style="display:none" data-i18n="admin_logout">Chiqish</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 data-i18n="hero_title">Mahalla — hamjihatlik va qo'shnichilik qadriyatlari</h1>
+          <p class="lead" data-i18n="hero_sub">
+            O'z mahallangizdagi yangiliklar, xizmatlar va tadbirlardan xabardor bo'ling. Fikr bildiring, qo'shiling va yordam bering.
+          </p>
+          <div class="hero-actions">
+            <a href="#news" class="btn primary" data-i18n="hero_cta1">Yangiliklar</a>
+            <a href="#qa" class="btn" data-i18n="hero_cta2">Savol berish</a>
+          </div>
+        </div>
+        <div class="hero-stats" aria-label="Qisqa statistikalar">
+          <div class="stat"><span id="statResidents">0</span><small data-i18n="stat_residents">Aholi</small></div>
+          <div class="stat"><span id="statEvents">0</span><small data-i18n="stat_events">Tadbir</small></div>
+          <div class="stat"><span id="statVolunteers">0</span><small data-i18n="stat_volunteers">Ko'ngilli</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="news" class="section">
+      <div class="container">
+        <div class="section-head column-mobile">
+          <h2 data-i18n="news_title">Yangiliklar</h2>
+          <div class="section-tools full-width-mobile">
+            <input id="newsSearch" type="search" placeholder="Qidirish..." aria-label="Yangiliklardan qidirish" />
+            <button id="addNewsBtn" class="btn" data-i18n="news_add">Qo'shish</button>
+          </div>
+        </div>
+        <div id="newsList" class="grid cards"></div>
+      </div>
+    </section>
+
+    <section id="announcements" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="ann_title">E'lonlar</h2>
+          <button id="addAnnBtn" class="btn" data-i18n="ann_add">E'lon joylash</button>
+        </div>
+        <div id="annList" class="grid cards"></div>
+      </div>
+    </section>
+
+    <section id="qa" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="qa_title">Savol-javob</h2>
+          <button id="askBtn" class="btn" data-i18n="qa_ask">Savol berish</button>
+        </div>
+        <div id="qaList" class="qa-list"></div>
+      </div>
+    </section>
+
+    <section id="volunteers" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="vol_title">Ko'ngillilar</h2>
+          <button id="joinVolBtn" class="btn" data-i18n="vol_join">Qo'shilish</button>
+        </div>
+        <div id="volList" class="grid responsive-3"></div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="gal_title">Galereya</h2>
+          <div class="section-tools">
+            <button id="addPhotoBtn" class="btn" data-i18n="gal_add">Foto qo'shish</button>
+          </div>
+        </div>
+        <div id="galleryGrid" class="grid gallery"></div>
+      </div>
+    </section>
+
+    <section id="groups" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="grp_title">Guruhlar</h2>
+          <button id="addGroupPostBtn" class="btn" data-i18n="grp_post">Post yozish</button>
+        </div>
+        <div class="tabs-wrapper">
+          <div class="tabs">
+            <button class="tab active" data-tab="youth" data-i18n="grp_youth">Yoshlar</button>
+            <button class="tab" data-tab="women" data-i18n="grp_women">Ayollar</button>
+            <button class="tab" data-tab="business" data-i18n="grp_business">Tadbirkorlar</button>
+          </div>
+        </div>
+        <div id="groupPosts" class="grid cards"></div>
+      </div>
+    </section>
+
+    <section id="leadership" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="leadership_title">Rahbariyat</h2>
+        </div>
+        <div id="leadershipList" class="grid leadership-grid"></div>
+      </div>
+    </section>
+
+    <section id="map" class="section alt">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="map_title">Interaktiv xarita</h2>
+        </div>
+        <div class="map-wrap">
+          <iframe
+            title="Mahalla xaritasi"
+            aria-label="Mahalla hududi"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=66.9%2C39.6%2C67.2%2C39.8&layer=mapnik"
+            style="border:0"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-col">
+        <h4 data-i18n="footer_about">Mahalla haqida</h4>
+        <p data-i18n="footer_about_desc">
+          Bizning maqsad — mahalla hayotini ochiq, qulay va hamjihat qilish.
+        </p>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_links">Havolalar</h4>
+        <ul class="footer-links">
+          <li><a href="#qa" data-i18n="footer_link_qa">Savol-javob</a></li>
+          <li><a href="#groups" data-i18n="footer_link_groups">Guruhlar</a></li>
+          <li><a href="#leadership" data-i18n="footer_link_leadership">Rahbariyat</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4 data-i18n="footer_contact">Aloqa</h4>
+        <p>Email: info@mahalla.local</p>
+        <p data-i18n="footer_address">Manzil: Samarqand, O'zbekiston</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <small>&copy; <span id="year"></span> <span data-i18n="brand">Mahalla</span>. Barcha huquqlar himoyalangan.</small>
+    </div>
+  </footer>
+
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <h3 id="modalTitle">Modal</h3>
+        <button class="modal-close" aria-label="Yopish">✕</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn ghost modal-close" data-i18n="modal_cancel">Bekor</button>
+        <button id="modalSubmit" class="btn primary" data-i18n="modal_save">Saqlash</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    /* ========== JavaScript code ========== */
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+
+    const STORE_KEYS = {
+      news: 'mahalla_news',
+      announcements: 'mahalla_ann',
+      qa: 'mahalla_qa',
+      volunteers: 'mahalla_vol',
+      gallery: 'mahalla_gallery',
+      groups: 'mahalla_groups',
+      stats: 'mahalla_stats',
+      lang: 'mahalla_lang',
+      theme: 'mahalla_theme',
+      role: 'mahalla_role'
+    };
+
+    const i18n = {
+      uz: {
+        brand: "Mahalla",
+        nav_news: "Yangiliklar", nav_ann: "E'lonlar",
+        nav_qa: "Savol-javob", nav_volunteers: "Ko'ngillilar", nav_gallery: "Galereya",
+        nav_groups: "Guruhlar", nav_leadership: "Rahbariyat", nav_map: "Xarita",
+        hero_title: "Mahalla — hamjihatlik va qo'shnichilik qadriyatlari",
+        hero_sub: "O'z mahallangizdagi yangiliklar, xizmatlar va tadbirlardan xabardor bo'ling. Fikr bildiring, qo'shiling va yordam bering.",
+        hero_cta1: "Yangiliklarni ko'rish", hero_cta2: "Savol berish",
+        stat_residents: "Aholi", stat_events: "Tadbir", stat_volunteers: "Ko'ngilli",
+        news_title: "Yangiliklar", news_add: "Yangilik qo'shish",
+        ann_title: "E'lonlar", ann_add: "E'lon joylash",
+        qa_title: "Savol-javob", qa_ask: "Savol berish",
+        vol_title: "Ko'ngillilar", vol_join: "Qo'shilish",
+        gal_title: "Galereya", gal_add: "Foto qo'shish",
+        grp_title: "Guruhlar", grp_post: "Post yozish", grp_youth: "Yoshlar", grp_women: "Ayollar", grp_business: "Tadbirkorlar",
+        leadership_title: "Rahbariyat",
+        map_title: "Interaktiv xarita",
+        footer_about: "Mahalla haqida", footer_about_desc: "Bizning maqsad — mahalla hayotini ochiq, qulay va hamjihat qilish.",
+        footer_links: "Havolalar", footer_link_qa: "Savol-javob", footer_link_groups: "Guruhlar", footer_link_leadership: "Rahbariyat",
+        footer_contact: "Aloqa", footer_address: "Manzil: Samarqand, O'zbekiston",
+        modal_cancel: "Bekor qilish", modal_save: "Saqlash",
+        admin_login: "Admin kirish", admin_logout: "Chiqish"
+      },
+      ru: {
+        brand: "Махалля",
+        nav_news: "Новости", nav_ann: "Объявления",
+        nav_qa: "Вопрос-ответ", nav_volunteers: "Волонтёры", nav_gallery: "Галерея",
+        nav_groups: "Группы", nav_leadership: "Руководство", nav_map: "Карта",
+        hero_title: "Махалля — ценности соседства и сплочённости",
+        hero_sub: "Будьте в курсе новостей, услуг и событий района. Пишите, присоединяйтесь и помогайте.",
+        hero_cta1: "Смотреть новости", hero_cta2: "Задать вопрос",
+        stat_residents: "Жители", stat_events: "События", stat_volunteers: "Волонтёры",
+        news_title: "Новости", news_add: "Добавить новость",
+        ann_title: "Объявления", ann_add: "Разместить объявление",
+        qa_title: "Вопрос-ответ", qa_ask: "Задать вопрос",
+        vol_title: "Волонтёры", vol_join: "Присоединиться",
+        gal_title: "Галерея", gal_add: "Добавить фото",
+        grp_title: "Группы", grp_post: "Создать пост", grp_youth: "Молодёжь", grp_women: "Женщины", grp_business: "Бизнес",
+        leadership_title: "Руководство",
+        map_title: "Интерактивная карта",
+        footer_about: "О махалле", footer_about_desc: "Наша цель — сделать жизнь махалли открытой, удобной и сплочённой.",
+        footer_links: "Ссылки", footer_link_qa: "Вопрос-ответ", footer_link_groups: "Группы", footer_link_leadership: "Руководство",
+        footer_contact: "Контакты", footer_address: "Адрес: Самарканд, Узбекистан",
+        modal_cancel: "Отмена", modal_save: "Сохранить",
+        admin_login: "Войти админ", admin_logout: "Выйти"
+      },
+      en: {
+        brand: "Mahalla",
+        nav_news: "News", nav_ann: "Announcements",
+        nav_qa: "Q&A", nav_volunteers: "Volunteers", nav_gallery: "Gallery",
+        nav_groups: "Groups", nav_leadership: "Leadership", nav_map: "Map",
+        hero_title: "Mahalla — values of solidarity and neighborliness",
+        hero_sub: "Stay updated with local news, services and events. Speak up, join and help.",
+        hero_cta1: "View news", hero_cta2: "Ask a question",
+        stat_residents: "Residents", stat_events: "Events", stat_volunteers: "Volunteers",
+        news_title: "News", news_add: "Add news",
+        ann_title: "Announcements", ann_add: "Post announcement",
+        qa_title: "Q&A", qa_ask: "Ask question",
+        vol_title: "Volunteers", vol_join: "Join",
+        gal_title: "Gallery", gal_add: "Add photo",
+        grp_title: "Groups", grp_post: "Write post", grp_youth: "Youth", grp_women: "Women", grp_business: "Entrepreneurs",
+        leadership_title: "Leadership",
+        map_title: "Interactive map",
+        footer_about: "About", footer_about_desc: "Our goal: make mahalla life open, convenient and united.",
+        footer_links: "Links", footer_link_qa: "Q&A", footer_link_groups: "Groups", footer_link_leadership: "Leadership",
+        footer_contact: "Contact", footer_address: "Address: Samarkand, Uzbekistan",
+        modal_cancel: "Cancel", modal_save: "Save",
+        admin_login: "Admin login", admin_logout: "Logout"
+      }
+    };
+
+    const defaultData = {
+      stats: { residents: 1250, events: 7, volunteers: 38 },
+      news: [
+        { id: uid(), title: "Suv ta'minoti yaxshilandi", date: today(), body: "Mahallamizda yangi nasos qurildi. Suv taqchilligi bartaraf etiladi.", tags: ["infratuzilma","suv"] },
+        { id: uid(), title: "Yoshlar sport festivali", date: today(-2), body: "Shanba kuni stadionda futbol va ko'pkurash bo'lib o'tadi.", tags: ["sport","yoshlar"] }
+      ],
+      announcements: [
+        { id: uid(), title: "Uchrashuv: 5-dekabr 18:00", date: today(1), body: "Mahalla yig'ilishi madaniyat markazida bo'lib o'tadi.", contact: "998-XX-XXX-XX-XX" }
+      ],
+      qa: [
+        { id: uid(), q: "Chiqindi tashish vaqti o'zgardimi?", a: "Ha, endi soat 20:00 dan 22:00 gacha.", author: "Ziyoda", date: today() }
+      ],
+      volunteers: [
+        { id: uid(), name: "Kamol", phone: "+998901234567", area: "Tozalik", note: "Har yakshanba subbotnik tashkil qiladi." },
+        { id: uid(), name: "Malika", phone: "+998933214567", area: "Ta'lim", note: "Bolalar uchun bepul darslar." }
+      ],
+      gallery: [
+        { id: uid(), src: "assets/img/placeholders/gallery-1.jpg", caption: "Navro'z tadbiridan lavha" },
+        { id: uid(), src: "assets/img/placeholders/gallery-2.jpg", caption: "Subbotnikdan so'ng" },
+        { id: uid(), src: "assets/img/placeholders/gallery-3.jpg", caption: "Yoshlar sporti" }
+      ],
+      groups: {
+        youth: [
+          { id: uid(), title: "IT to'garagi boshlanadi", body: "Dushanba-kunlari 17:00 da.", author: "Javlon", date: today(-1) }
+        ],
+        women: [
+          { id: uid(), title: "Qo'l mehnati ko'rgazmasi", body: "Milliy hunarmandchilik.", author: "Saodat", date: today(-3) }
+        ],
+        business: [
+          { id: uid(), title: "Kichik biznes grantlari", body: "Ariza topshirish muddati: 15-dekabr.", author: "Rustam", date: today(-5) }
+        ]
+      },
+      leadership: [
+        { 
+          id: uid(), 
+          name: "Xo'janov Sherali Abduraxmonovich", 
+          position: "Mahalla raisi",
+          birthYear: "1974",
+          education: "O'rta maxsus, 2007 yil, Toshkent agrobuxgalteriya hisobi",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(95) 1747074",
+          hireDate: "21.05.2025",
+          nationality: "O'zbek"
+        },
+        { 
+          id: uid(), 
+          name: "Dustmirzaev Orzimurod Dehqonboy o'g'li", 
+          position: "Hokim yordamchisi",
+          birthYear: "1995",
+          education: "Oliy, 2022 yil, TATU Samarqand filiali, Kompyuter injineringi (AT servis)",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(95) 7090323",
+          hireDate: "06.07.2023",
+          nationality: "O'zbek"
+        },
+        { 
+          id: uid(), 
+          name: "Yaegiboyev G'iyos Shavkatovich", 
+          position: "Profilaktika inspektori",
+          birthYear: "1991",
+          education: "Oliy, 2013 yil, SamDU, Tarix",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(94) 4774491",
+          hireDate: "10.09.2023",
+          nationality: "O'zbek"
+        },
+        { 
+          id: uid(), 
+          name: "Muxitdinov Mansur Muxiddin o'g'li", 
+          position: "Yoshlar yetakchisi",
+          birthYear: "1995",
+          education: "Oliy, 2018 yil, SamDAKI",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(95) 9228477",
+          hireDate: "12.06.2025",
+          nationality: "O'zbek"
+        },
+        { 
+          id: uid(), 
+          name: "Ziyotova Shohida Mamasulovna", 
+          position: "Xotin-qizlar faoli",
+          birthYear: "1971",
+          education: "O'rta maxsus, 2014 yil, Pedagogika, boshlang'ich ta'lim",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(97) 9296479",
+          hireDate: "05.09.2022",
+          nationality: "O'zbek"
+        },
+        { 
+          id: uid(), 
+          name: "Xasanov Sardor Ikmatulla o'g'li", 
+          position: "Ijtimoiy xodim",
+          birthYear: "1997",
+          education: "Oliy, 2024 yil, SamISI",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(99) 9973213",
+          hireDate: "12.06.2025",
+          nationality: "O'zbek"
+        },
+        { 
+          id: uid(), 
+          name: "Sirojov Maxmuddin Nematovich", 
+          position: "Soliq inspektori",
+          birthYear: "1968",
+          education: "Oliy, 1995 yil, Samarqand QXI",
+          workPlace: "Samarqand tumani 'Navkat' mahallasi",
+          phone: "(77) 2026800",
+          hireDate: "12.09.2024",
+          nationality: "O'zbek"
+        }
+      ]
+    };
+
+    // Utilities
+    function uid(){ return Math.random().toString(36).slice(2,9); }
+    function today(offsetDays=0){
+      const d = new Date(); d.setDate(d.getDate()+offsetDays);
+      return d.toISOString().slice(0,10);
+    }
+    function load(key, fallback){
+      try{ const v = localStorage.getItem(key); return v? JSON.parse(v) : fallback; }
+      catch{ return fallback; }
+    }
+    function save(key, value){ localStorage.setItem(key, JSON.stringify(value)); }
+    function notify(msg){
+      const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+      setTimeout(()=> t.classList.remove("show"), 1800);
+    }
+
+    // Theme & language
+    const themeRoot = document.documentElement;
+    const themeToggle = $("#theme-toggle");
+    const langToggle = $("#lang-toggle");
+    let currentLang = load(STORE_KEYS.lang, "uz");
+    let currentTheme = load(STORE_KEYS.theme, "light");
+
+    function applyTheme(){
+      themeRoot.classList.toggle("dark", currentTheme === "dark");
+      if(themeToggle) themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙";
+    }
+    function applyLang(){
+      const dict = i18n[currentLang] || i18n.uz;
+      $$("[data-i18n]").forEach(el=>{
+        const key = el.getAttribute("data-i18n");
+        if(dict[key]) el.textContent = dict[key];
+      });
+      if(langToggle) langToggle.textContent = currentLang.toUpperCase();
+    }
+    if(themeToggle) themeToggle.addEventListener("click", ()=>{
+      currentTheme = currentTheme === "dark" ? "light" : "dark";
+      save(STORE_KEYS.theme, currentTheme); applyTheme();
+    });
+    if(langToggle) langToggle.addEventListener("click", ()=>{
+      const seq = ["uz","ru","en"];
+      currentLang = seq[(seq.indexOf(currentLang)+1)%seq.length];
+      save(STORE_KEYS.lang, currentLang); applyLang();
+    });
+
+    // Navigation: mobile toggle
+    const navToggle = $(".nav-toggle");
+    const navList = $("#primary-menu");
+    if(navToggle) navToggle.addEventListener("click", ()=>{
+      const open = navList.classList.toggle("show");
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    // Modal system
+    const modal = $("#modal");
+    const modalTitle = $("#modalTitle");
+    const modalBody = $("#modalBody");
+    const modalSubmit = $("#modalSubmit");
+    $$(".modal-close").forEach(btn=> btn.addEventListener("click", closeModal));
+
+    function openModal(title, bodyHTML, onSubmit){
+      modalTitle.textContent = title;
+      modalBody.innerHTML = bodyHTML;
+      modal.classList.add("show");
+      modalSubmit.onclick = ()=>{
+        if(onSubmit) onSubmit();
+      };
+    }
+    function closeModal(){
+      modal.classList.remove("show");
+      modalBody.innerHTML = "";
+      modalSubmit.onclick = null;
+    }
+
+    // Data state
+    const state = {
+      stats: load(STORE_KEYS.stats, defaultData.stats),
+      news: load(STORE_KEYS.news, defaultData.news),
+      announcements: load(STORE_KEYS.announcements, defaultData.announcements),
+      qa: load(STORE_KEYS.qa, defaultData.qa),
+      volunteers: load(STORE_KEYS.volunteers, defaultData.volunteers),
+      gallery: load(STORE_KEYS.gallery, defaultData.gallery),
+      groups: load(STORE_KEYS.groups, defaultData.groups),
+      leadership: load('mahalla_leadership', defaultData.leadership)
+    };
+    function persist(){
+      save(STORE_KEYS.stats, state.stats);
+      save(STORE_KEYS.news, state.news);
+      save(STORE_KEYS.announcements, state.announcements);
+      save(STORE_KEYS.qa, state.qa);
+      save(STORE_KEYS.volunteers, state.volunteers);
+      save(STORE_KEYS.gallery, state.gallery);
+      save(STORE_KEYS.groups, state.groups);
+      save('mahalla_leadership', state.leadership);
+    }
+
+    // Admin role
+    let currentRole = load(STORE_KEYS.role, "user");
+    const loginBtn = $("#loginBtn");
+    const logoutBtn = $("#logoutBtn");
+    function isAdmin(){ return currentRole === "admin"; }
+    function setRole(role){
+      currentRole = role;
+      save(STORE_KEYS.role, currentRole);
+      enforcePermissions();
+      renderQA();
+      renderNews();
+      renderAnnouncements();
+      renderGallery();
+      notify(role==="admin" ? "Admin rejimi yoqildi" : "Admin rejimidan chiqildi");
+    }
+    function formAdminLogin(){
+      return `
+        <div class="form-grid">
+          <label>Login</label>
+          <input id="admin_user" class="input" placeholder="admin"/>
+          <label>Parol</label>
+          <input id="admin_pass" class="input" type="password" placeholder="••••••"/>
+        </div>
+      `;
+    }
+    function tryAdminLogin(){
+      openModal("Admin kirish", formAdminLogin(), ()=>{
+        const u = $("#admin_user").value.trim();
+        const p = $("#admin_pass").value.trim();
+        if(u==="admin" && p==="Azizbekbro2005"){
+          setRole("admin");
+          closeModal();
+        } else {
+          notify("Login yoki parol noto'g'ri");
+        }
+      });
+    }
+    function enforcePermissions(){
+      const addPhotoBtn = $("#addPhotoBtn");
+      const addNewsBtn = $("#addNewsBtn");
+      const addAnnBtn = $("#addAnnBtn");
+
+      if(addPhotoBtn) addPhotoBtn.style.display = isAdmin() ? "inline-flex" : "none";
+      if(addNewsBtn) addNewsBtn.style.display = isAdmin() ? "inline-flex" : "none";
+      if(addAnnBtn) addAnnBtn.style.display = isAdmin() ? "inline-flex" : "none";
+      if(loginBtn) loginBtn.style.display = isAdmin() ? "none" : "inline-flex";
+      if(logoutBtn) logoutBtn.style.display = isAdmin() ? "inline-flex" : "none";
+    }
+    if(loginBtn) loginBtn.addEventListener("click", tryAdminLogin);
+    if(logoutBtn) logoutBtn.addEventListener("click", ()=> setRole("user"));
+
+    /* --- RENDERERS --- */
+
+    function renderStats(){
+      $("#statResidents").textContent = state.stats.residents;
+      $("#statEvents").textContent = state.stats.events;
+      $("#statVolunteers").textContent = state.stats.volunteers;
+      $("#year").textContent = new Date().getFullYear();
+    }
+
+    function renderNews(filter=""){
+      const wrap = $("#newsList"); wrap.innerHTML = "";
+      state.news
+        .filter(n => n.title.toLowerCase().includes(filter.toLowerCase()) || n.body.toLowerCase().includes(filter.toLowerCase()))
+        .sort((a,b)=> b.date.localeCompare(a.date))
+        .forEach(n=>{
+          const el = document.createElement("article");
+          el.className = "card";
+          el.innerHTML = `
+            <h3>${escapeHTML(n.title)}</h3>
+            <small>${n.date} · ${n.tags.map(t=>`#${escapeHTML(t)}`).join(" ")}</small>
+            <p>${escapeHTML(n.body)}</p>
+            ${isAdmin() ? `
+            <div style="display:flex;gap:8px">
+              <button class="btn ghost" data-del="${n.id}">O'chirish</button>
+            </div>` : ""}
+          `;
+          wrap.appendChild(el);
+        });
+
+      if(isAdmin()){
+        $$("#newsList [data-del]").forEach(btn=>{
+          btn.onclick = ()=>{
+            const id = btn.getAttribute("data-del");
+            state.news = state.news.filter(n=> n.id!==id);
+            persist(); renderNews($("#newsSearch").value); notify("O'chirildi");
+          };
+        });
+      }
+    }
+
+    function renderAnnouncements(){
+      const wrap = $("#annList"); wrap.innerHTML = "";
+      state.announcements.sort((a,b)=> b.date.localeCompare(a.date)).forEach(a=>{
+        const el = document.createElement("article");
+        el.className = "card";
+        el.innerHTML = `
+          <h3>${escapeHTML(a.title)}</h3>
+          <small>${a.date}</small>
+          <p>${escapeHTML(a.body)}</p>
+          <p><strong>Bog'lanish:</strong> ${escapeHTML(a.contact || "-")}</p>
+          ${isAdmin() ? `
+          <div style="display:flex;gap:8px">
+            <button class="btn ghost" data-del="${a.id}">O'chirish</button>
+          </div>` : ""}
+        `;
+        wrap.appendChild(el);
+      });
+      if(isAdmin()){
+        $$("#annList [data-del]").forEach(btn=>{
+          btn.onclick = ()=>{
+            const id = btn.getAttribute("data-del");
+            state.announcements = state.announcements.filter(n=> n.id!==id);
+            persist(); renderAnnouncements(); notify("O'chirildi");
+          };
+        });
+      }
+    }
+
+    function renderQA(){
+      const wrap = $("#qaList"); wrap.innerHTML = "";
+      state.qa.sort((a,b)=> b.date.localeCompare(a.date)).forEach(i=>{
+        const el = document.createElement("div");
+        el.className = "qa-item";
+        el.innerHTML = `
+          <div class="qa-meta"><strong>${escapeHTML(i.author)}</strong><small>${i.date}</small></div>
+          <p><strong>Savol:</strong> ${escapeHTML(i.q)}</p>
+          <p><strong>Javob:</strong> ${escapeHTML(i.a || "Hali javob berilmagan")}</p>
+          ${isAdmin() && !i.a ? `<button class="btn primary small" style="margin-top:8px" data-answer="${i.id}">Javob berish</button>` : ""}
+        `;
+        wrap.appendChild(el);
+      });
+
+      if(isAdmin()){
+        $$("[data-answer]").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const id = btn.getAttribute("data-answer");
+            openModal("Savolga javob berish", formAnswer(), () => {
+               const ans = $("#q_answer_text").value.trim();
+               if(!ans) { notify("Javob yozilmadi"); return; }
+               
+               const item = state.qa.find(x => x.id === id);
+               if(item) {
+                 item.a = ans;
+                 persist();
+                 renderQA();
+                 notify("Javob saqlandi");
+                 closeModal();
+               }
+            });
+          });
+        });
+      }
+    }
+
+    function renderVolunteers(){
+      const wrap = $("#volList"); wrap.innerHTML = "";
+      state.volunteers.forEach(v=>{
+        const el = document.createElement("div");
+        el.className = "card";
+        el.innerHTML = `
+          <h3>${escapeHTML(v.name)}</h3>
+          <p style="color:var(--primary)">${escapeHTML(v.phone || "")}</p>
+          <small>${escapeHTML(v.area)}</small>
+          <p>${escapeHTML(v.note || "")}</p>
+        `;
+        wrap.appendChild(el);
+      });
+    }
+
+    function renderGallery(){
+      const wrap = $("#galleryGrid"); wrap.innerHTML = "";
+      state.gallery.forEach(p=>{
+        const el = document.createElement("div");
+        el.className = "photo";
+        el.innerHTML = `
+          <img src="${escapeAttr(p.src)}" alt="${escapeAttr(p.caption)}">
+          <div class="caption">
+            <strong>${escapeHTML(p.caption)}</strong>
+            ${isAdmin() ? `
+            <div style="margin-top:8px;display:flex;gap:8px">
+              <button class="btn ghost" data-del="${p.id}">O'chirish</button>
+            </div>` : ""}
+          </div>
+        `;
+        wrap.appendChild(el);
+      });
+      if(isAdmin()){
+        $$("#galleryGrid [data-del]").forEach(btn=>{
+          btn.onclick = ()=>{
+            const id = btn.getAttribute("data-del");
+            state.gallery = state.gallery.filter(p=> p.id!==id);
+            persist(); renderGallery(); notify("Foto o'chirildi");
+          };
+        });
+      }
+    }
+
+    let currentGroupTab = "youth";
+    function renderGroups(){
+      const wrap = $("#groupPosts"); if(!wrap) return; wrap.innerHTML = "";
+      $$(".tab").forEach(t=> t.classList.toggle("active", t.dataset.tab===currentGroupTab));
+      (state.groups[currentGroupTab]||[]).sort((a,b)=> b.date.localeCompare(a.date)).forEach(p=>{
+        const el = document.createElement("article");
+        el.className = "card";
+        el.innerHTML = `
+          <h3>${escapeHTML(p.title)}</h3>
+          <small>${escapeHTML(p.author)} · ${p.date}</small>
+          <p>${escapeHTML(p.body)}</p>
+        `;
+        wrap.appendChild(el);
+      });
+    }
+
+    function renderLeadership(){
+      const wrap = $("#leadershipList"); if(!wrap) return; wrap.innerHTML = "";
+      state.leadership.forEach(person=>{
+        const el = document.createElement("div");
+        el.className = "leadership-card";
+        el.innerHTML = `
+          <h3>${escapeHTML(person.name)}</h3>
+          <div class="position">${escapeHTML(person.position)}</div>
+          <div class="info">
+            <p><strong>Tug'ilgan yili:</strong> ${escapeHTML(person.birthYear)}</p>
+            <p><strong>Ma'lumoti:</strong> ${escapeHTML(person.education)}</p>
+            <p><strong>Ish joyi:</strong> ${escapeHTML(person.workPlace)}</p>
+            <p><strong>Millati:</strong> ${escapeHTML(person.nationality)}</p>
+            <p><strong>Ishga qabul qilingan sana:</strong> ${escapeHTML(person.hireDate)}</p>
+          </div>
+          <div class="contact">
+            <strong>Telefon:</strong> ${escapeHTML(person.phone)}
+          </div>
+        `;
+        wrap.appendChild(el);
+      });
+    }
+
+    /* --- FORMS --- */
+
+    function formNews(){
+      return `
+        <div class="form-grid">
+          <label>Sarlavha</label>
+          <input id="f_title" class="input" />
+          <label>Sana</label>
+          <input id="f_date" class="input" type="date" value="${today()}" />
+          <label>Matn</label>
+          <textarea id="f_body"></textarea>
+          <label>Teglar (vergul bilan)</label>
+          <input id="f_tags" class="input" />
+        </div>
+      `;
+    }
+    function readFormNews(){
+      const title = $("#f_title").value.trim();
+      const date = $("#f_date").value || today();
+      const body = $("#f_body").value.trim();
+      const tags = $("#f_tags").value.split(",").map(s=> s.trim()).filter(Boolean);
+      return { id: uid(), title, date, body, tags };
+    }
+
+    function formAnn(){
+      return `
+        <div class="form-grid">
+          <label>Sarlavha</label>
+          <input id="a_title" class="input" />
+          <label>Sana</label>
+          <input id="a_date" class="input" type="date" value="${today()}" />
+          <label>Matn</label>
+          <textarea id="a_body"></textarea>
+          <label>Aloqa</label>
+          <input id="a_contact" class="input" />
+        </div>
+      `;
+    }
+    function readFormAnn(){
+      const title = $("#a_title").value.trim();
+      const date = $("#a_date").value || today();
+      const body = $("#a_body").value.trim();
+      const contact = $("#a_contact").value.trim();
+      return { id: uid(), title, date, body, contact };
+    }
+
+    function formQA(){
+      return `
+        <div class="form-grid">
+          <label>Ismingiz</label>
+          <input id="q_name" class="input" placeholder="Ism"/>
+          <label>Savolingiz</label>
+          <textarea id="q_text" placeholder="Savol matni"></textarea>
+        </div>
+      `;
+    }
+    function formAnswer(){
+      return `
+        <div class="form-grid">
+          <label>Javobingiz</label>
+          <textarea id="q_answer_text" placeholder="Javob yozing..."></textarea>
+        </div>
+      `;
+    }
+    function readFormQA(){
+      return {
+        id: uid(),
+        author: $("#q_name").value.trim() || "Anonim",
+        q: $("#q_text").value.trim(),
+        a: "",
+        date: today()
+      };
+    }
+
+    function formVolunteer(){
+      return `
+        <div class="form-grid">
+          <label>Ism Familiya</label>
+          <input id="v_name" class="input" placeholder="Ismingiz"/>
+          <label>Telefon raqam</label>
+          <input id="v_phone" class="input" type="tel" placeholder="+998..."/>
+          <label>Yo'nalish</label>
+          <input id="v_area" class="input" placeholder="Masalan: Tozalik, Ta'lim"/>
+          <label>Izoh</label>
+          <textarea id="v_note"></textarea>
+        </div>
+      `;
+    }
+    function readFormVolunteer(){
+      return {
+        id: uid(),
+        name: $("#v_name").value.trim(),
+        phone: $("#v_phone").value.trim(),
+        area: $("#v_area").value.trim(),
+        note: $("#v_note").value.trim()
+      };
+    }
+
+    function formPhoto(){
+      return `
+        <div class="form-grid">
+          <label>Foto URL</label>
+          <input id="p_src" class="input" placeholder="https://... yoki assets/img/..."/>
+          <label>Sarlavha</label>
+          <input id="p_caption" class="input"/>
+        </div>
+      `;
+    }
+    function readFormPhoto(){
+      return {
+        id: uid(),
+        src: $("#p_src").value.trim(),
+        caption: $("#p_caption").value.trim()
+      };
+    }
+
+    // Escape helpers
+    function escapeHTML(str=""){
+      return str.replace(/[&<>"']/g, s=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[s]));
+    }
+    function escapeAttr(str=""){ return escapeHTML(str); }
+
+
+    /* --- EVENTS --- */
+
+    // Savol berish
+    if($("#askBtn")){
+      $("#askBtn").addEventListener("click", ()=>{
+        openModal("Savol berish", formQA(), ()=>{
+          const item = readFormQA();
+          if(!item.q){ notify("Savol matni kerak"); return; }
+          state.qa.push(item); persist(); renderQA(); notify("Savol yuborildi"); closeModal();
+        });
+      });
+    }
+
+    // Ko'ngilli bo'lish
+    if($("#joinVolBtn")){
+      $("#joinVolBtn").addEventListener("click", ()=>{
+        openModal("Ko'ngilli bo'lish", formVolunteer(), ()=>{
+          const v = readFormVolunteer();
+          if(!v.name || !v.area || !v.phone){ notify("Ism, Telefon va Yo'nalish kerak"); return; }
+          state.volunteers.push(v); state.stats.volunteers = (state.stats.volunteers||0)+1;
+          persist(); renderVolunteers(); renderStats(); notify("Qo'shildingiz"); closeModal();
+        });
+      });
+    }
+
+    // Boshqa admin eventlari
+    const newsSearchEl = $("#newsSearch");
+    if($("#addNewsBtn")){
+      $("#addNewsBtn").addEventListener("click", ()=>{
+        if(!isAdmin()){ notify("Yangilik qo'shish faqat admin uchun"); return; }
+        openModal("Yangilik qo'shish", formNews(), ()=>{
+          const item = readFormNews();
+          if(!item.title || !item.body){ notify("Sarlavha va matn kerak"); return; }
+          state.news.push(item); persist(); renderNews(newsSearchEl.value); notify("Yangilik qo'shildi"); closeModal();
+        });
+      });
+    }
+    if(newsSearchEl){
+      newsSearchEl.addEventListener("input", (e)=> renderNews(e.target.value));
+    }
+
+    if($("#addAnnBtn")){
+      $("#addAnnBtn").addEventListener("click", ()=>{
+        if(!isAdmin()){ notify("E'lon joylash faqat admin uchun"); return; }
+        openModal("E'lon joylash", formAnn(), ()=>{
+          const item = readFormAnn();
+          if(!item.title || !item.body){ notify("Sarlavha va matn kerak"); return; }
+          state.announcements.push(item); persist(); renderAnnouncements(); notify("E'lon joylandi"); closeModal();
+        });
+      });
+    }
+
+    if($("#addPhotoBtn")){
+      $("#addPhotoBtn").addEventListener("click", ()=>{
+        if(!isAdmin()){ notify("Foto qo'shish faqat admin uchun"); return; }
+        openModal("Foto qo'shish", formPhoto(), ()=>{
+          const p = readFormPhoto();
+          if(!p.src){ notify("Foto URL kerak"); return; }
+          state.gallery.push(p); persist(); renderGallery(); notify("Foto qo'shildi"); closeModal();
+        });
+      });
+    }
+
+    // Groups tabs
+    $$(".tab").forEach(t=> t.addEventListener("click", ()=>{
+      currentGroupTab = t.dataset.tab; renderGroups();
+    }));
+
+    // Initialize
+    (function init(){
+      applyTheme();
+      applyLang();
+      renderStats();
+      renderNews();
+      renderAnnouncements();
+      renderQA();
+      renderVolunteers();
+      renderGallery();
+      renderGroups();
+      renderLeadership();
+      enforcePermissions();
+    })();
+  </script>
+</body>
+</html>
